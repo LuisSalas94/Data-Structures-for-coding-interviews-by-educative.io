@@ -150,7 +150,50 @@ function reverse(list) {
 	list.setHead(previousNode);
 }
 
-let list = new LinkedList();
-for (let i = 0; i < 10; i++) {
-	list = list.insertAtHead(i);
+function detectLoop(list) {
+	let oneStep = list.getHead();
+	let twoStep = list.getHead();
+
+	while (oneStep != null && twoStep != null && twoStep.nextElement != null) {
+		oneStep = oneStep.nextElement;
+		twoStep = twoStep.nextElement.nextElement;
+		//loop exists
+		if (oneStep == twoStep) {
+			return true;
+		}
+	}
+	return false;
 }
+
+function findMid(list) {
+	let midNode = null;
+	let length = 0;
+	let tempNode = list.getHead();
+
+	while (tempNode !== null) {
+		tempNode = tempNode.nextElement;
+		length++;
+	}
+
+	let middle = Math.ceil(length / 2);
+
+	midNode = list.getHead();
+
+	for (let i = 1; i < middle; i++) {
+		midNode = midNode.nextElement;
+	}
+
+	return midNode;
+}
+
+let list = new LinkedList();
+/* for (let i = 0; i < 10; i++) {
+	list = list.insertAtHead(i);
+} */
+list.insertAtHead(1);
+list.insertAtHead(2);
+list.insertAtHead(3);
+list.insertAtHead(4);
+list.insertAtHead(5);
+
+findMid(list);
