@@ -115,9 +115,39 @@ class LinkedList {
 		return this;
 	}
 
+	length() {
+		let count = 0;
+		let currentNode = this.head;
+		while (currentNode !== null) {
+			count++;
+			currentNode = currentNode.nextElement;
+		}
+		return count;
+	}
+
+	setHead(newHead) {
+		this.head = newHead;
+		return this;
+	}
+
 	getHead() {
 		return this.head;
 	}
+}
+
+function reverse(list) {
+	let previousNode = null;
+	let currentNode = list.getHead();
+	let nextNode = null;
+	//reversal
+	while (currentNode !== null) {
+		nextNode = currentNode.nextElement;
+		currentNode.nextElement = previousNode;
+		previousNode = currentNode;
+		currentNode = nextNode;
+	}
+
+	list.setHead(previousNode);
 }
 
 let list = new LinkedList();
