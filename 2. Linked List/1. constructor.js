@@ -186,14 +186,67 @@ function findMid(list) {
 	return midNode;
 }
 
-let list = new LinkedList();
-/* for (let i = 0; i < 10; i++) {
-	list = list.insertAtHead(i);
-} */
-list.insertAtHead(1);
-list.insertAtHead(2);
-list.insertAtHead(3);
-list.insertAtHead(4);
-list.insertAtHead(5);
+function removeDuplicates(list) {
+	if (list.isEmpty()) {
+		return null;
+	}
 
-findMid(list);
+	//if list has one node, leave it unchanged
+	if (list.getHead().nextElement == null) {
+		return list;
+	}
+
+	let outerNode = list.getHead();
+	while (outerNode !== null) {
+		//iterator for the inner loop
+		let innerNode = outerNode;
+		//duplicate found ahead
+		while (innerNode !== null) {
+			if (
+				innerNode.nextElement !== null &&
+				outerNode.data == innerNode.nextElement.data
+			) {
+				innerNode.nextElement = innerNode.nextElement.nextElement;
+			} else {
+				innerNode = innerNode.nextElement;
+			}
+		}
+		outerNode = outerNode.nextElement;
+	}
+
+	return list;
+}
+
+function union(list1, list2) {
+	if (list1.isEmpty()) {
+		return list2;
+	} else if (list2.isEmpty()) {
+		return list1;
+	}
+
+	let start = list1.getHead();
+
+	//Traverse the first list till the tail
+	while (start.nextElement != null) {
+		start = start.nextElement;
+	}
+
+	//Link last element of first list to the first element of second list
+	start.nextElement = list2.getHead();
+	removeDuplicates(list1);
+
+	return list1;
+}
+
+let ulist1 = new LinkedList();
+let ulist2 = new LinkedList();
+ulist1.insertAtHead(8);
+ulist1.insertAtHead(22);
+ulist1.insertAtHead(15);
+ulist1.insertAtHead(22);
+
+ulist2.insertAtHead(21);
+ulist2.insertAtHead(14);
+ulist2.insertAtHead(21);
+ulist2.insertAtHead(8);
+ulist2.insertAtHead(7);
