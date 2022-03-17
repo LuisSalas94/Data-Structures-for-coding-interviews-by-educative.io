@@ -238,15 +238,58 @@ function union(list1, list2) {
 	return list1;
 }
 
-let ulist1 = new LinkedList();
-let ulist2 = new LinkedList();
-ulist1.insertAtHead(8);
-ulist1.insertAtHead(22);
-ulist1.insertAtHead(15);
-ulist1.insertAtHead(22);
+function intersection(list1, list2) {
+	let result = new LinkedList();
+	let t1 = list1.getHead();
+	let t2 = list2.getHead();
 
-ulist2.insertAtHead(21);
-ulist2.insertAtHead(14);
-ulist2.insertAtHead(21);
-ulist2.insertAtHead(8);
-ulist2.insertAtHead(7);
+	while (t1 !== null) {
+		while (t2 !== null) {
+			if (t1.data == t2.data) {
+				result.insertAtHead(t1.data);
+			}
+			t2 = t2.nextElement;
+		}
+		t2 = list2.getHead();
+		t1 = t1.nextElement;
+	}
+
+	removeDuplicates(result);
+	return result;
+}
+
+function findNth(list, n) {
+	let nthNode = null;
+	let length = 0;
+	let tempNode = list.getHead();
+
+	while (tempNode != null) {
+		tempNode = tempNode.nextElement;
+		length++;
+	}
+
+	length;
+
+	let nthPos = length - n;
+
+	if (nthPos < 0 || nthPos > length) {
+		return null;
+	}
+
+	nthNode = list.getHead();
+
+	for (let i = 0; i < nthPos; i++) {
+		nthNode = nthNode.nextElement;
+	}
+
+	return nthNode;
+}
+
+let l1 = new LinkedList();
+l1.insertAtHead(54);
+l1.insertAtHead(89);
+l1.insertAtHead(11);
+l1.insertAtHead(40);
+l1.insertAtHead(23);
+
+findNth(l1, 3);
