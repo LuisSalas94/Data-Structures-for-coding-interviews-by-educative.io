@@ -104,7 +104,26 @@ class Queue {
 }
 
 let myQueue = new Queue();
-console.log("Enqueue Elements: 2, 4, 6, 8, 10");
+
+function findBin(number) {
+	let result = [];
+	let myQueue = new Queue();
+	let s1, s2;
+	myQueue.enqueue("1");
+	for (let i = 0; i < number; i++) {
+		result.push(myQueue.dequeue());
+		s1 = result[i] + "0";
+		s2 = result[i] + "1";
+		myQueue.enqueue(s1);
+		myQueue.enqueue(s2);
+	}
+
+	return result;
+}
+
+findBin(10);
+
+/* console.log("Enqueue Elements: 2, 4, 6, 8, 10");
 myQueue.enqueue(2);
 myQueue.enqueue(4);
 myQueue.enqueue(6);
@@ -118,4 +137,4 @@ console.log("getFront(): " + myQueue.getFront());
 console.log("getTail(): " + myQueue.getTail());
 console.log("Enqueue Elements 12,14");
 myQueue.enqueue(12);
-myQueue.enqueue(14);
+myQueue.enqueue(14); */
