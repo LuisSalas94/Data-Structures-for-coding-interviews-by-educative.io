@@ -66,6 +66,20 @@ class BinarySearchTree {
 		//if the currentNode IS EQUEAL to null, then
 		//we simply return
 	}
+
+	inOrderPrint(currentNode) {
+		//if the currrentNODE IS NOT EQUAL TO NULL
+		if (currentNode !== null) {
+			//make recursive call to the left subtree
+			this.inOrderPrint(currentNode.leftChild);
+			//print the value of the currentNode
+			console.log(currentNode.val);
+			//make recursive call to the right subtree
+			this.inOrderPrint(currentNode.rightChild);
+		}
+		//if the currentNode IS EQUEAL to null, then
+		//we simply return
+	}
 }
 
 const BST = new BinarySearchTree(6);
