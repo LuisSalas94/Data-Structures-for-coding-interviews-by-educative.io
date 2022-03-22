@@ -94,10 +94,29 @@ class BinarySearchTree {
 		//if the currentNode IS EQUAL to null, then
 		//we simply return from the function
 	}
+
+	search(value) {
+		//let's start with the root
+		let currentNode = this.root;
+		while (currentNode && currentNode.val !== value) {
+			//the loop will run until the currentNode is not null
+			//and until we get to our value
+			if (value < currentNode.val) {
+				//traverse to the left subtree
+				currentNode = currentNode.leftChild;
+			} else {
+				//traverse to the right subtree
+				currentNode = currentNode.rightChild;
+			}
+		}
+		//after the loop, we'll have either the searched value
+		//or null in case the value was not found
+		return currentNode;
+	}
 }
 
 const BST = new BinarySearchTree(6);
-console.log("The root val for BST : ", BST.root.val);
+//console.log("The root val for BST : ", BST.root.val);
 BST.insert(4);
 BST.insert(9);
 BST.insert(5);
@@ -106,5 +125,6 @@ BST.insert(8);
 BST.insert(12);
 BST.insert(10);
 BST.insert(14);
-
-BST.preOrderPrint(BST.root);
+//BST.preOrderPrint(BST.root);
+console.log(BST.search(8));
+console.log(BST.search(11));
