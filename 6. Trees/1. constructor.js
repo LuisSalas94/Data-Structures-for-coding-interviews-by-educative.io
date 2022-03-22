@@ -113,6 +113,49 @@ class BinarySearchTree {
 		//or null in case the value was not found
 		return currentNode;
 	}
+
+	delete(currentNode, value) {
+		//case 1: checking for the empty tree
+		//if rootNode equals NULL
+		if (currentNode == null) {
+			return false;
+		}
+
+		//start traversing the tree
+		//until we find the value to be deleted
+		//or end up with a null node
+		let parentNode;
+		while (currentNode && currentNode.val !== value) {
+			if (value < currentNode.val) {
+				currentNode = currentNode.leftChild;
+			} else {
+				currentNode = currentNode.rightChild;
+			}
+		}
+
+		//case 2: currentNode id equal to null. Value not founf
+		if (currentNode === null) {
+			return false;
+		} else if (
+			currentNode.leftChild === null &&
+			currentNode.rightChild == null
+		) {
+			//case 3: CurrentNode is a leaf node
+			//i.e. right and left EQUAL to null
+			//now checking if the node to be deleted
+			//is a left or a right child of its parent or if it's the root
+			if (currentNode.val == this.root.val) {
+				this.root = null;
+				return true;
+			} else if (currentNode.val < parentNode.val) {
+				parentNode.leftChild = null;
+				return true;
+			} else {
+				parentNode.rightChild = null;
+				return true;
+			}
+		}
+	}
 }
 
 const BST = new BinarySearchTree(6);
@@ -123,8 +166,9 @@ BST.insert(5);
 BST.insert(2);
 BST.insert(8);
 BST.insert(12);
-BST.insert(10);
-BST.insert(14);
-//BST.preOrderPrint(BST.root);
-console.log(BST.search(8));
-console.log(BST.search(11));
+BST.inOrderPrint(BST.root);
+console.log("Delete 12!");
+console.log(BST.delete(BST.root, 12));
+BST.inOrderPrint(BST.root);
+
+//console.log("Deleting from an empty tree : ", BST.delete(BST.root, 6));
