@@ -170,9 +170,23 @@ class BinarySearchTree {
 	}
 }
 
+function findMin(rootNode) {
+	if (rootNode == null) {
+		return null;
+	}
+	while (rootNode.leftChild) {
+		rootNode = rootNode.leftChild;
+	}
+	return rootNode.val;
+}
+
 const BST = new BinarySearchTree(6);
+BST.insert(20);
+BST.insert(-1);
+BST.insert(9);
+console.log(findMin(BST.root));
 //console.log("The root val for BST : ", BST.root.val);
-BST.insert(4);
+/* BST.insert(4);
 BST.insert(9);
 BST.insert(5);
 BST.insert(2);
@@ -182,5 +196,5 @@ BST.inOrderPrint(BST.root);
 console.log("Delete 12!");
 console.log(BST.delete(BST.root, 12));
 BST.inOrderPrint(BST.root);
-
+ */
 //console.log("Deleting from an empty tree : ", BST.delete(BST.root, 6));
