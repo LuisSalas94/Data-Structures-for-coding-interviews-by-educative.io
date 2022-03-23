@@ -199,11 +199,52 @@ function inOrderTraverse(rootNode, tree) {
 	return tree;
 }
 
+function findAncestors(rootNode, k) {
+	let result = [];
+	recfindAncestors(rootNode, k, result);
+	return result;
+}
+
+function recfindAncestors(rootNode, k, result) {
+	if (rootNode == null) {
+		return false;
+	} else if (rootNode.val == k) {
+		return true;
+	} else if (
+		recfindAncestors(rootNode.leftChild, k, result) ||
+		recfindAncestors(rootNode.rightChild, k, result)
+	) {
+		result.push(rootNode.val);
+		return true;
+	}
+	return false;
+}
+
+function findHeight(rootNode) {
+	//no node in BST
+	if (rootNode === null) {
+		return 0;
+	} else if (rootNode.leftChild === null && rootNode.rightChild === null) {
+		return 0;
+	} else {
+		let leftHeight = findHeight(rootNode.leftChild);
+		let rightHeight = findHeight(rootNode.rightChild);
+		if (leftHeight > rightHeight) {
+			return leftHeight + 1;
+		} else {
+			return rightHeight + 1;
+		}
+	}
+}
+
 const BST = new BinarySearchTree(6);
-BST.insert(1);
-BST.insert(133);
+BST.insert(4);
+BST.insert(9);
+BST.insert(5);
+BST.insert(2);
+BST.insert(8);
 BST.insert(12);
-console.log(findkthMax(BST.root, 3));
+console.log(findHeight(BST.root));
 //console.log("The root val for BST : ", BST.root.val);
 /* BST.insert(4);
 BST.insert(9);
