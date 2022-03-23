@@ -180,11 +180,30 @@ function findMin(rootNode) {
 	return rootNode.val;
 }
 
+function findkthMax(rootNode, k) {
+	let tree = [];
+	tree = inOrderTraverse(rootNode, tree);
+	console.log(tree);
+	if (tree.length - k >= 0 && k > 0) {
+		return tree[tree.length - k];
+	}
+	return null;
+}
+
+function inOrderTraverse(rootNode, tree) {
+	if (rootNode !== null) {
+		tree = inOrderTraverse(rootNode.leftChild, tree);
+		tree.push(rootNode.val);
+		tree = inOrderTraverse(rootNode.rightChild, tree);
+	}
+	return tree;
+}
+
 const BST = new BinarySearchTree(6);
-BST.insert(20);
-BST.insert(-1);
-BST.insert(9);
-console.log(findMin(BST.root));
+BST.insert(1);
+BST.insert(133);
+BST.insert(12);
+console.log(findkthMax(BST.root, 3));
 //console.log("The root val for BST : ", BST.root.val);
 /* BST.insert(4);
 BST.insert(9);
