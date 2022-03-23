@@ -154,6 +154,18 @@ class BinarySearchTree {
 				parentNode.rightChild = null;
 				return true;
 			}
+		} else if (currentNode.rightChild == null) {
+			//if the node to be deleted has a left child only, we'll link the left child to the parent of the node to be deleted
+			if (currentNode.val == this.root.val) {
+				this.root = currentNode.leftChild;
+				return true;
+			} else if (currentNode.leftChild.val < parentNode.val) {
+				parentNode.leftChild = currentNode.leftChild;
+				return true;
+			} else {
+				parentNode.rightChild = currentNode.leftChild;
+				return true;
+			}
 		}
 	}
 }
