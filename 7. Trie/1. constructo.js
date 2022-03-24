@@ -22,4 +22,33 @@ class TrieNode {
 	}
 }
 
+class Trie {
+	constructor() {
+		//Root node
+		this.root = new TrieNode("");
+	}
+
+	//The charCodeAt() function returns the order of a given character
+	getIndex(t) {
+		return t.charCodeAt(0) - "a".charCodeAt(0);
+	}
+
+	//Function to insert a key, value pair int he Trie
+	insert(key, value) {
+		return null;
+	}
+
+	//Function to search for a given key in the Trie
+	search(key) {
+		return false;
+	}
+
+	//Function to delete a given key from the Trie
+	delete(key) {
+		return null;
+	}
+}
+
 let trieNode = new TrieNode("a");
+let t = new Trie();
+console.log(t.getIndex("b"));
