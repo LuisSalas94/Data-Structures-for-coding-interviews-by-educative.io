@@ -76,11 +76,38 @@ class Trie {
 		currentNode.markAsLeaf();
 		console.log("'" + key + "' inserted");
 	}
+
+	//Function to search a given key in Trie
+	search(key) {
+		if (key == null) {
+			return false;
+		}
+		key = key.toLowerCase();
+		let currentNode = this.root;
+		let index = 0;
+		//Iterate the Trie with given character index,
+		//If it is null at any point then we stop and return false
+		//We will return true only if we reach leafNode and have traversed the
+		//Trie based on the length of the key
+		for (let level = 0; level < key.length; level++) {
+			index = this.getIndex(key[level]);
+			if (currentNode.children[index] == null) {
+				return false;
+			}
+			currentNode = currentNode.children[index];
+		}
+
+		if (currentNode != null && currentNode.isEndWord) {
+			return true;
+		}
+		return false;
+	}
 }
 
 /* let trieNode = new TrieNode("a"); */
 //Input keys (use only "a" through "z" and lower case)
 let keys = ["the", "a", "there", "answer", "any", "by", "bye", "their", "abc"];
+let output = ["Not present in the trie", "Present in the trie"];
 let t = new Trie();
 console.log("Keys to insert: ");
 console.log(keys);
@@ -88,3 +115,13 @@ console.log(keys);
 for (let i = 0; i < keys.length; i++) {
 	t.insert(keys[i]);
 }
+
+//Search for different keys
+if (t.search("the") == true) console.log("the --- " + output[1]);
+else console.log("the --- " + output[0]);
+
+if (t.search("these") == true) console.log("these --- " + output[1]);
+else console.log("these --- " + output[0]);
+
+if (t.search("abc") == true) console.log("abc --- " + output[1]);
+else console.log("abc --- " + output[0]);
