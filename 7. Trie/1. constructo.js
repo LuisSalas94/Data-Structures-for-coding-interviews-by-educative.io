@@ -47,8 +47,44 @@ class Trie {
 	delete(key) {
 		return null;
 	}
+
+	//Function to insert a key in the Trie
+	insert(key) {
+		//None keys are not allowed
+		if (key == null) {
+			return;
+		}
+		//Keys are stored in lowercase
+		key = key.toLowerCase();
+		let currentNode = this.root;
+		//to store the character index
+		let index = 0;
+
+		//Iterate the trie with the given character index,
+		//If the index points to null
+		//simply create a Trienode and go down a level
+		for (let level = 0; level < key.length; level++) {
+			index = this.getIndex(key[level]);
+			if (currentNode.children[index] == null) {
+				currentNode.children[index] = new TrieNode(key[level]);
+				console.log(String(key[level]) + " inserted");
+			}
+			currentNode = currentNode.children[index];
+		}
+
+		//Mark the end character as leaf node
+		currentNode.markAsLeaf();
+		console.log("'" + key + "' inserted");
+	}
 }
 
-let trieNode = new TrieNode("a");
+/* let trieNode = new TrieNode("a"); */
+//Input keys (use only "a" through "z" and lower case)
+let keys = ["the", "a", "there", "answer", "any", "by", "bye", "their", "abc"];
 let t = new Trie();
-console.log(t.getIndex("b"));
+console.log("Keys to insert: ");
+console.log(keys);
+//Construct Trie
+for (let i = 0; i < keys.length; i++) {
+	t.insert(keys[i]);
+}
