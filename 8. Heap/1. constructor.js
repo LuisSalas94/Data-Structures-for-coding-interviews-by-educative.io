@@ -190,8 +190,28 @@ function convertMax(maxHeap) {
 	return maxHeap;
 }
 
-var maxHeap2 = [9, 4, 7, 1, -2, 6, 5];
-console.log(convertMax(maxHeap2));
+function findKSmallest(arr, k) {
+	let myHeap = new minHeap();
+	myHeap.buildHeap(arr);
+	let kSmallest = [];
+
+	if (k > arr.length) {
+		k = arr.length;
+	}
+
+	for (let i = 0; i < k; i++) {
+		kSmallest.push(myHeap.removeMin());
+	}
+
+	return kSmallest;
+}
+
+const arr2 = [9, 4, 7, 1, -2, 6, 5];
+const k = 3;
+console.log(findKSmallest(arr2, k));
+
+//var maxHeap2 = [9, 4, 7, 1, -2, 6, 5];
+//console.log(convertMax(maxHeap2));
 
 /* let heap2 = new minHeap();
 heap2.insert(12);
