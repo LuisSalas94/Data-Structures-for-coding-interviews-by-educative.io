@@ -168,24 +168,41 @@ class Trie {
 	}
 }
 
+function totalWords(rootN) {
+	let result = 0;
+	//Leaf denotes end of a word
+	if (rootN.isEndWord) {
+		result += 1;
+	}
+
+	for (let i = 0; i < 26; i++) {
+		if (rootN.children[i] != null) {
+			result += totalWords(rootN.children[i]);
+		}
+	}
+	return result;
+}
+
 /* let trieNode = new TrieNode("a"); */
 //Input keys (use only "a" through "z" and lower case)
 let keys = ["the", "a", "there", "answer", "any", "by", "bye", "their", "abc"];
 let output = ["Not present in the trie", "Present in the trie"];
 let t = new Trie();
-console.log("Keys to insert: ");
-console.log(keys);
+t.insert("data", 0);
+t.insert("structures", 1);
+console.log(totalWords(t.root));
+
 //Construct Trie
-for (let i = 0; i < keys.length; i++) {
+/* for (let i = 0; i < keys.length; i++) {
 	t.insert(keys[i]);
-}
+} */
 
 //Search for different keys
-if (t.search("the") == true) console.log("the --- " + output[1]);
+/* if (t.search("the") == true) console.log("the --- " + output[1]);
 else console.log("the --- " + output[0]);
 
 if (t.search("these") == true) console.log("these --- " + output[1]);
 else console.log("these --- " + output[0]);
 
 if (t.search("abc") == true) console.log("abc --- " + output[1]);
-else console.log("abc --- " + output[0]);
+else console.log("abc --- " + output[0]); */
