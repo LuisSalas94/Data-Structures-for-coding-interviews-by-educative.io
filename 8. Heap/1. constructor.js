@@ -86,10 +86,10 @@ heap.insert(100);
 console.log(heap.getMax());
 heap.removeMax();
 console.log(heap.getMax()); */
-heap.buildHeap(arr);
-console.log(heap.getMax());
-heap.removeMax();
-console.log(heap.getMax());
+//heap.buildHeap(arr);
+//console.log(heap.getMax());
+//heap.removeMax();
+//console.log(heap.getMax());
 
 class minHeap {
 	constructor() {
@@ -165,3 +165,43 @@ class minHeap {
 		}
 	}
 }
+
+function minHeapify(heap, index) {
+	var left = index * 2;
+	var right = index * 2 + 1;
+	var smallest = index;
+
+	if (heap.length > left && heap[smallest] > heap[left]) {
+		smallest = left;
+	}
+	if (heap.length > right && heap[smallest] > heap[right]) smallest = right;
+	if (smallest != index) {
+		var tmp = heap[smallest];
+		heap[smallest] = heap[index];
+		heap[index] = tmp;
+		minHeapify(heap, smallest);
+	}
+	return heap;
+}
+
+function convertMax(maxHeap) {
+	for (var i = Math.floor(maxHeap.length / 2); i > -1; i--)
+		maxHeap = minHeapify(maxHeap, i);
+	return maxHeap;
+}
+
+var maxHeap2 = [9, 4, 7, 1, -2, 6, 5];
+console.log(convertMax(maxHeap2));
+
+/* let heap2 = new minHeap();
+heap2.insert(12);
+heap2.insert(10);
+heap2.insert(-10);
+heap2.insert(100);
+console.log(heap2.getMin());
+
+let newHeap = new minHeap();
+newHeap.buildHeap(arr);
+console.log(newHeap.getMin());
+newHeap.removeMin();
+console.log(newHeap.getMin()); */
