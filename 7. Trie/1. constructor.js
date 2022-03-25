@@ -214,15 +214,37 @@ function findWords(root) {
 	return result;
 }
 
+function sortArray(arr) {
+	let result = [];
+	//Creating Trie and Inserting words from array
+	let trie = new Trie();
+
+	for (let x = 0; x < arr.length; x++) {
+		trie.insert(String(arr[x], x));
+	}
+
+	let word = [];
+	for (let i = 0; i < 26; i++) {
+		word.push("");
+	}
+
+	getWords(trie.root, result, 0, word);
+	return result;
+}
+
 /* let trieNode = new TrieNode("a"); */
 //Input keys (use only "a" through "z" and lower case)
 let keys = ["the", "a", "there", "answer", "any", "by", "bye", "their", "abc"];
 let output = ["Not present in the trie", "Present in the trie"];
 let t = new Trie();
-for (let x = 0; x < keys.length; x++) {
+/* for (let x = 0; x < keys.length; x++) {
 	t.insert(keys[x], x);
-}
-console.log(findWords(t.root));
+} */
+//console.log(findWords(t.root));
+
+let arr = ["abc", "aba", "ceed", "cde"];
+console.log(arr);
+console.log(sortArray(arr));
 
 /* t.insert("data", 0);
 t.insert("structures", 1);
