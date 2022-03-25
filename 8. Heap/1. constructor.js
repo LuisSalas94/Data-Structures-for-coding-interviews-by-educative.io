@@ -206,9 +206,21 @@ function findKSmallest(arr, k) {
 	return kSmallest;
 }
 
+function findKLargest(lst, k) {
+	var heap = new maxHeap();
+	heap.buildHeap(lst);
+	var kLargest = [];
+	if (k > lst.length) {
+		k = lst.length;
+	}
+	for (var i = 0; i < k; i++) kLargest.push(heap.removeMax());
+
+	return kLargest;
+}
+
 const arr2 = [9, 4, 7, 1, -2, 6, 5];
 const k = 3;
-console.log(findKSmallest(arr2, k));
+console.log(findKLargest(arr2, k));
 
 //var maxHeap2 = [9, 4, 7, 1, -2, 6, 5];
 //console.log(convertMax(maxHeap2));
