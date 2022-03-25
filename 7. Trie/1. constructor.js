@@ -183,14 +183,50 @@ function totalWords(rootN) {
 	return result;
 }
 
+//Recursive function to generate all words
+function getWords(root, result, level, string) {
+	//Leaf denotes end of a world
+	if (root.isEndWord) {
+		//current word is stored till the "level" in the character array
+		let temp = "";
+		for (let x = 0; x < level; x++) {
+			temp += String(string[x]);
+		}
+		result.push(temp);
+	}
+
+	for (let i = 0; i < 26; i++) {
+		if (root.children[i] != null) {
+			//Non.None child, so add that index to the character array
+			string[level] = String.fromCharCode(i + "a".charCodeAt(0));
+			getWords(root.children[i], result, level + 1, string);
+		}
+	}
+}
+
+function findWords(root) {
+	let result = [];
+	let chararr = [];
+	for (let i = 0; i < 20; i++) {
+		chararr.push(null);
+	}
+	getWords(root, result, 0, chararr);
+	return result;
+}
+
 /* let trieNode = new TrieNode("a"); */
 //Input keys (use only "a" through "z" and lower case)
 let keys = ["the", "a", "there", "answer", "any", "by", "bye", "their", "abc"];
 let output = ["Not present in the trie", "Present in the trie"];
 let t = new Trie();
-t.insert("data", 0);
+for (let x = 0; x < keys.length; x++) {
+	t.insert(keys[x], x);
+}
+console.log(findWords(t.root));
+
+/* t.insert("data", 0);
 t.insert("structures", 1);
-console.log(totalWords(t.root));
+console.log(totalWords(t.root)); */
 
 //Construct Trie
 /* for (let i = 0; i < keys.length; i++) {
