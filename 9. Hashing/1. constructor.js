@@ -193,9 +193,36 @@ function isDisjoint(list1, list2) {
 	return true;
 }
 
-let list1 = [9, 4, 3, 1, -2, 6, 5];
-let list2 = [7, 10, 8];
-console.log(isDisjoint(list1, list2));
+function findPair(my_list) {
+	let result = [];
+	//Create HashMap with Key being sum and value being a pair i.e key = 3 , value = {1,2}
+	//Traverse all possible pairs in my_list and store sums in map
+	//If sum already exist then print out the two pairs.
+	let hMap = new HashTable();
+	for (let i = 0; i < my_list.length; i++) {
+		for (let j = i + 1; j < my_list[j]; j++) {
+			//calculate sum
+			let sum = my_list[i] + my_list[j];
+			if (hMap.search(sum) == null) {
+				//if sum is not present in Map then insert it alogwith pair
+				hMap.insert(sum, [my_list[i], my_list[j]]);
+			} else {
+				//Sum already present in Map
+				let prev_pair = hMap.search(sum);
+				//Since array elements are distinct, We dont't need to check if any element is common among pais
+				let secondPair = [my_list[i], my_list[j]];
+				result.push(prev_pair);
+				result.push(secondPair);
+				return result;
+			}
+		}
+	}
+	return result;
+}
+
+let list1 = [7, 4, 9, 12, 0, 1];
+console.log(findPair(list1));
+//console.log(isDisjoint(list1, list2));
 
 /* ht.insert(2, "London");
 console.log(ht.bucket[2].value);
