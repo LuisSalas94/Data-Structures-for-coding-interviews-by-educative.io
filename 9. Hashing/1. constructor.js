@@ -176,9 +176,26 @@ function isSubset(list1, list2) {
 	return true;
 }
 
-let list1 = [1, 2, 3, 4, 5, 6];
-let list2 = [2, 4, 6];
-console.log(isSubset(list1, list2));
+function isDisjoint(list1, list2) {
+	let ht = new HashTable();
+	//Inserting list1's elements in ht
+	for (let i = 0; i < list1.length; i++) {
+		ht.insert(list1[i], i);
+	}
+
+	//Checking to see if all of list2's elements are in the hashtable
+	for (let j = 0; j < list2.length; j++) {
+		if (ht.search(list2[j] != null)) {
+			//return false if there is an element in list2 that is in list1
+			return false;
+		}
+	}
+	return true;
+}
+
+let list1 = [9, 4, 3, 1, -2, 6, 5];
+let list2 = [7, 10, 8];
+console.log(isDisjoint(list1, list2));
 
 /* ht.insert(2, "London");
 console.log(ht.bucket[2].value);
