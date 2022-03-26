@@ -154,9 +154,34 @@ class HashTable {
 	}
 }
 
-let ht = new HashTable();
-ht.insert(2, "London");
+function isSubset(list1, list2) {
+	//if list2 has more elements than list1, it would not be the subset of list1
+	if (list2.length > list1.length) {
+		return false;
+	}
+
+	let ht = new HashTable();
+	//Inserting list1's elements in ht
+	for (let i = 0; i < list1.length; i++) {
+		ht.insert(list1[i], i);
+	}
+
+	//Checking to see if all of list2's elements are in the hashtable
+	for (let j = 0; j < list2.length; j++) {
+		if (ht.search(list2[j] == null)) {
+			//return false if there is an element is list2 not in list1
+			return false;
+		}
+	}
+	return true;
+}
+
+let list1 = [1, 2, 3, 4, 5, 6];
+let list2 = [2, 4, 6];
+console.log(isSubset(list1, list2));
+
+/* ht.insert(2, "London");
 console.log(ht.bucket[2].value);
 ht.insert(12, "Moscow");
 console.log(ht.bucket[2].next.value);
-console.log("Size of the array: " + String(ht.size));
+console.log("Size of the array: " + String(ht.size)); */
